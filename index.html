@@ -26,7 +26,7 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0}
 *,*::before,*::after{box-sizing:inherit}
-body{background:var(--bg);color:var(--ink);font:400 15px/1.35 var(--body);overflow:hidden;overscroll-behavior:none;
+body{background:#0E1219;color:var(--ink);font:400 15px/1.35 var(--body);overflow:hidden;overscroll-behavior:none;
   -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 button{font:inherit;color:inherit;touch-action:manipulation}
 button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
@@ -99,7 +99,7 @@ button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 #mamie{position:absolute;left:50px;bottom:140px;transform-origin:70% 90%}
 #mamie.fire{animation:recoil .22s}
 @keyframes recoil{30%{transform:translateX(5px) rotate(4deg)}}
-#gatehp{position:absolute;left:8px;right:8px;top:-4px;height:9px;background:rgba(0,0,0,.55);border-radius:5px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.35)}
+#gatehp{position:absolute;left:5px;right:45px;top:84px;height:8px;z-index:2;background:rgba(0,0,0,.55);border-radius:5px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.35)}
 #gatehp i{display:block;height:100%;width:100%;background:linear-gradient(#7BE39A,#3DAF63);transition:width .2s}
 #gatehp.low i{background:linear-gradient(#FFD34D,#E0A500)}#gatehp.crit i{background:linear-gradient(#FF8A80,#D63C33)}
 
@@ -366,6 +366,29 @@ ul.tips li{margin-bottom:6px}
 #mini-end{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,9,16,.7);padding:16px;z-index:5}
 #mini-end .card{max-width:360px;width:100%;color:var(--ink);text-align:center}
 
+/* ---------- landscape layout : free bottom, side buttons, centred windows ---------- */
+@media (orientation:landscape){:root{padding-bottom:0}}
+#pback{display:none}
+.land #hud{right:calc(60px + env(safe-area-inset-right,0px))}
+.land #tabs{left:auto;bottom:auto;right:calc(6px + env(safe-area-inset-right,0px));top:6px;z-index:72;flex-direction:column;gap:5px;background:none;border:0;border-radius:0;overflow:visible;box-shadow:none}
+.land #tabs button{flex:0 0 auto;width:46px;height:42px;padding:0;border-radius:12px;border:1px solid rgba(0,0,0,.6);background:linear-gradient(#2E384E,#141A27);font-size:20px;line-height:40px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 5px rgba(0,0,0,.45)}
+.land #tabs button span{display:none}
+.land #tabs button.on{background:linear-gradient(#46557A,#1F2940);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 2px var(--yellow)}
+.land #panelwrap:not(.open) ~ #tabs button.on{background:linear-gradient(#2E384E,#141A27);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 5px rgba(0,0,0,.45)}
+.land #tabs button i{right:-3px;top:-3px;box-shadow:0 0 0 2px #141A27}
+.land #quest{left:50%;right:auto;top:auto;bottom:calc(6px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(56%,520px);box-shadow:0 3px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12)}
+.land #camnav{left:calc(6px + env(safe-area-inset-left,0px));right:calc(6px + env(safe-area-inset-right,0px));bottom:calc(6px + env(safe-area-inset-bottom,0px));justify-content:space-between;pointer-events:none}
+.land #camnav button{pointer-events:auto;width:44px;height:36px}
+.land #panelwrap{left:50%;right:auto;top:50%;bottom:auto;width:min(580px,calc(100% - 250px));height:min(440px,calc(100% - 20px));transform:translate(-50%,-50%) scale(.94);opacity:0;pointer-events:none;border-radius:18px;overflow:hidden;z-index:71;box-shadow:0 0 0 3px rgba(10,14,22,.9),0 20px 60px rgba(0,0,0,.65);transition:transform .16s ease-out,opacity .16s}
+.land #panelwrap.open{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}
+.land #panelwrap.open + #pback{display:block;position:absolute;inset:0;z-index:69;background:rgba(6,9,16,.58)}
+.land #pclose{left:auto;right:9px;top:9px;width:38px;height:38px;z-index:3;border:2px solid #7A1A15;background:linear-gradient(#E4584F,#B92C25);box-shadow:0 2px 5px rgba(0,0,0,.4)}
+.land #panel{padding:14px 16px 16px}
+.land #panel::before{content:"";float:right;width:42px;height:38px}
+.land #sheet{align-items:center}
+.land #sheet-body{border-radius:18px;max-height:92%}
+.land #mini-bot{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));padding-left:calc(12px + env(safe-area-inset-left,0px));padding-right:calc(12px + env(safe-area-inset-right,0px))}
+.land #mini-top{padding-left:calc(12px + env(safe-area-inset-left,0px));padding-right:calc(12px + env(safe-area-inset-right,0px))}
 @media (prefers-reduced-motion:reduce){
   .z .zin,.p .pin,.badge,#knock .bub,.cloud,.speech,.lg,.ar,.cab,.builder,.builder .ham,#mini-truck,#mini-fore,.mbg,#mini-road{animation:none!important}
   .z .zin{transform:translateX(-50%)}
@@ -440,6 +463,7 @@ ul.tips li{margin-bottom:6px}
     <button id="pclose" data-act="pclose" aria-label="Fermer le panneau">✕</button>
     <main id="panel"></main>
   </div>
+  <div id="pback" data-act="pclose"></div>
   <nav id="tabs" aria-label="Menus">
     <button data-act="tab" data-a="rue" class="on">🏘️<span>Rue</span></button>
     <button data-act="tab" data-a="gens">👥<span>Survivants</span></button>
@@ -555,6 +579,7 @@ const WEAPONS = [
 ];
 const SPECIALS = [
   {id:'potager', n:'Le Potager Collectif', g:'Jardin partagé',      e:'🥕', lvl:4, cost:12000, wall:'#CFE3C4', sign:'#5B2A86', aw:'#7A3FB0', trim:'#2E4030', d:'Produit des vivres tout seul, jour et nuit, même quand tu ne joues pas.'},
+  {id:'antenne', n:'L\'Antenne Relais',     g:'Émetteur radio',      e:'📡', lvl:8, nuts:25, cost:0, wall:'#B8C4D6', sign:'#5B2A86', aw:'#7A3FB0', trim:'#2B3550', d:'Émet jour et nuit : les nouveaux arrivants ont au moins le niveau 5 et viennent un peu plus souvent. Se paie en écrous.'},
   {id:'mercs',   n:'QG des Gros Bras',     g:'Base de mercenaires', e:'💪', lvl:6, cost:20000, wall:'#9A98AE', sign:'#5B2A86', aw:'#7A3FB0', trim:'#2E2440', d:'Un Gros Bras ramène un camion à ta place, chargement intact. Ensuite il récupère 5 h 30.'}
 ];
 const MERC_CD = 19800, MERC_COST = [0, 50000, 100000];
@@ -1031,8 +1056,8 @@ let sc = 1, viewW = 390, worldW = 1000, camX = 0, camV = 0, camT = null, rotF = 
 
 const blankProds = () => [0, 1, 2].map(() => ({st:'empty', t:0, T:0, left:0, L:0, acc:0}));
 function newGame(){
-  return {v:2, coins:120, supplies:25, nuts:3, resc:0, wsel:null, heroes:[], ward:[], tasks:[], lots:[], surv:[], nextId:1, waiting:null, waitT:14, runs:0, gate:0, gateHp:GATES[0].hp, kills:0, q:0,
-    st:{orders:0, earned:0, breaches:0, sent:0, picked:0, welcomed:0, saved:0}, clock:0, mute:false, rot:false, intro:false, offers:null, mig:false, lastSeen:Date.now(), savedAt:0};
+  return {v:2, coins:120, supplies:25, nuts:3, resc:0, wsel:null, wun:0, km:0, ach:[], heroes:[], ward:[], tasks:[], lots:[], surv:[], nextId:1, waiting:null, waitT:14, runs:0, gate:0, gateHp:GATES[0].hp, kills:0, q:0,
+    st:{orders:0, earned:0, breaches:0, sent:0, picked:0, welcomed:0, saved:0, perfect:0, mega:0}, clock:0, mute:false, rot:false, intro:false, offers:null, mig:false, lastSeen:Date.now(), savedAt:0};
 }
 function cleanLot(l){
   if (!l || typeof l !== 'object') return {k:'empty'};
@@ -1052,12 +1077,13 @@ function sanitize(o){
   if (!o || typeof o !== 'object' || o.v !== 2 || !Array.isArray(o.lots) || !Array.isArray(o.surv)) return null;
   const s = Object.assign(newGame(), o), d = newGame();
   if (typeof o.nuts !== 'number') s.nuts = 5;
+  s.ach = (Array.isArray(o.ach) ? o.ach : []).filter((id, k, a) => ACH.some(x => x.id === id) && a.indexOf(id) === k);
   s.wsel = typeof o.wsel === 'number' ? clamp(o.wsel | 0, 0, WEAPONS.length - 1) : null;
   s.heroes = (Array.isArray(o.heroes) ? o.heroes : []).filter((id, k, a) => HEROES.some(h => h.id === id) && a.indexOf(id) === k);
   s.ward = (Array.isArray(o.ward) ? o.ward : []).filter(id => COSTUMES.some(c => c.id === id));
   s.tasks = (Array.isArray(o.tasks) ? o.tasks : []).filter(t => t && TASKS.some(x => x.id === t.id) && typeof t.base === 'number' && typeof t.goal === 'number' && t.r && typeof t.r === 'object').slice(0, 3);
   s.st = Object.assign(d.st, o.st || {});
-  ['coins','supplies','nuts','resc','kills','q','gate','gateHp','clock','waitT','nextId','runs'].forEach(k => { if (typeof s[k] !== 'number' || !isFinite(s[k])) s[k] = d[k]; });
+  ['coins','supplies','nuts','resc','km','wun','kills','q','gate','gateHp','clock','waitT','nextId','runs'].forEach(k => { if (typeof s[k] !== 'number' || !isFinite(s[k])) s[k] = d[k]; });
   s.gate = clamp(Math.floor(s.gate), 0, GATES.length - 1);
   s.lots = s.lots.slice(0, MAX_LOTS).map(cleanLot);
   s.surv = s.surv.filter(x => x && typeof x.id === 'number' && PERSOS[x.perso]).map(x => ({id:x.id, name:String(x.name || 'Anonyme').slice(0, 20), perso:x.perso, lvl:clamp(x.lvl | 0, 1, 9), look:Object.assign({sk:0, h:0, st:0}, x.look || {}), job:null}));
@@ -1207,13 +1233,16 @@ const rushCost = t => Math.max(1, Math.ceil(t / 300)), rushRunCost = t => Math.m
 const gateMax = () => GATES[S.gate].hp;
 const homeName = l => !l.st || l.st === 'maison' ? HOUSE_NAME[l.lvl] : HOMES.find(h => h.id === l.st).n + ['', ' à étage', ' sur trois niveaux'][l.lvl - 1];
 const homeSVG = (l, i) => !l.st || l.st === 'maison' ? houseSVG(l.lvl, l.seed, i) : quirkySVG(l.st, l.lvl, l.seed);
+const specCost = d => d.nuts ? {n:d.nuts} : {c:d.cost};
+const hasBuilt = id => S.lots.some(l => l.k === 'special' && l.type === id);
+const maxDepots = () => 1 + Math.floor(level() / 4);
 const SPEC = id => SPECIALS.find(x => x.id === id);
 const hasSpec = id => S.lots.some(l => kindOf(l) === 'special' && (l.k === 'build' ? l.into.type : l.type) === id);
 const potRate = () => 2 * (1 + .2 * level()) / 60;
 const mercLot = () => S.lots.find(l => l.k === 'special' && l.type === 'mercs');
 const mercReady = () => { const l = mercLot(); return !!l && l.cd.slice(0, l.n).some(c => c <= 0); };
 const intoName = o => o.k === 'shop' ? SHOP[o.type].n : o.k === 'house' ? 'Logement' : o.k === 'special' ? SPEC(o.type).n : 'Dépôt de vivres';
-const weaponIdx = () => { let k = 0; WEAPONS.forEach((w, i) => { if (S.runs >= w.runs) k = i; }); return k; };
+const weaponIdx = () => { let k = 0; WEAPONS.forEach((w, i) => { if (S.runs >= w.runs) k = i; }); return Math.max(k, clamp(S.wun | 0, 0, WEAPONS.length - 1)); };
 const pDur = (d, p) => DUR0[p] * d.tf;
 const pRev = (d, p) => pDur(d, p) / TICK * (p + 1) * d.m;
 const pCost0 = (d, p) => Math.max(2, Math.round(pRev(d, p) / (RATIO[p] * Math.pow(d.m, .35))));
@@ -1297,7 +1326,7 @@ function applyCam(){
   el.mid.style.transform = 'translate3d(' + (-camX * .35).toFixed(1) + 'px,0,0)';
 }
 function camTo(x){ camT = clamp(x, 0, Math.max(0, worldW - viewW)); camV = 0; }
-function camToLot(i){ const open = land && el.panelwrap.classList.contains('open'); const vis = open ? viewW - el.panelwrap.offsetWidth / sc : viewW; camTo(lotX(i) + LOT_W / 2 - vis / 2); }
+function camToLot(i){ const vis = viewW; camTo(lotX(i) + LOT_W / 2 - vis / 2); }
 const prim = e => rotF ? e.clientY : e.clientX;
 el.scene.addEventListener('pointerdown', e => {
   if (sheetOpen || mini) return;
@@ -1511,13 +1540,13 @@ function econTick(dt, offline){
     } else if (l.k === 'special'){ if (l.type === 'mercs') l.cd = l.cd.map(c => Math.max(0, c - dt)); else S.supplies += potRate() * dt;
     } else if (l.k === 'depot' && l.run && !l.run.done){ l.run.t -= dt; if (l.run.t <= 0){ l.run.t = 0; l.run.done = true; worldDirty = true; dirty(); } }
   }
-  if (!S.waiting){ S.waitT -= dt * (cap() - S.surv.length >= 2 ? 1.6 : 1) * (hasHero('lulu') ? 2 : 1); if (S.waitT <= 0) makeWaiting(); }
+  if (!S.waiting){ S.waitT -= dt * (cap() - S.surv.length >= 2 ? 1.6 : 1) * (hasHero('lulu') ? 2 : 1) * (hasBuilt('antenne') ? 1.25 : 1) * (Z.some(z => !z.dead) ? .35 : 1.25); if (S.waitT <= 0) makeWaiting(); }
 }
 function makeWaiting(){
   const used = new Set(S.surv.map(s => s.name)); let name = pick(NAMES); for (let k = 0; k < 14 && used.has(name); k++) name = pick(NAMES);
   let perso = pick(PKEYS);
   if (Math.random() < .55){ const want = []; S.lots.forEach(l => { if (l.k === 'shop') l.staff.forEach(id => { const s = id != null && survBy(id); if (!s || s.perso !== SHOP[l.type].cat) want.push(SHOP[l.type].cat); }); }); if (want.length) perso = pick(want); }
-  const lvl = clamp(1 + Math.floor(Math.pow(Math.random(), 2) * (2.2 + level() * .45)) + (hasHero('lulu') ? 1 : 0), 1, 9);
+  const lvl = clamp(1 + Math.floor(Math.pow(Math.random(), 2) * (2.2 + level() * .45)) + (hasHero('lulu') ? 1 : 0), hasBuilt('antenne') ? 5 : 1, 9);
   S.waiting = {name, perso, lvl, look:{sk:rint(0, 5), h:rint(0, 6), st:rint(0, 4)}, bio:pick(BIOS)}; S.waitT = rnd(40, 75); dirty();
 }
 function renderKnock(){
@@ -1601,7 +1630,7 @@ function panelLot(i){
 }
 function panelGate(){
   const wi = weaponIdx(), w = WEAPONS[wi], wn = WEAPONS[wi + 1], g = GATES[S.gate], gn = GATES[S.gate + 1];
-  return '<div class="card"><div class="row"><span class="av" style="width:48px;height:52px">' + MAMIE + '</span><div class="grow"><b>Mamie Jacotte, vigie</b><small>Ancienne championne de ball-trap. Elle tire toute seule sur le zombie le plus proche, et plus vite quand le portail est renforcé.</small></div></div></div>' +
+  return '<div class="card"><div class="row"><span class="av" style="width:48px;height:52px">' + MAMIE + '</span><div class="grow"><b>Mamie Jacotte, vigie</b><small>Ancienne championne de ball-trap. Elle tire toute seule sur le zombie le plus proche, et plus vite quand le portail est renforcé. Tant que des zombies traînent devant le portail, les survivants n\'osent presque pas approcher : dégage la voie.</small></div></div></div>' + killCard() +
     weaponCards() +
     '<div class="card"><div class="row"><span class="big">🚧</span><div class="grow"><b>' + g.n + '</b><small><span data-dyn="ghp"></span>' + (gn ? '. Ensuite : ' + gn.n + ' (' + gn.hp + ' points)' : '. Portail ultime.') + '</small></div>' + (gn ? costBtn('upGate', '', 'Renforcer', {c:gn.cost}, 'sm') : '') + '</div></div>';
 }
@@ -1629,6 +1658,7 @@ function jobTxt(s){
 }
 function panelGens(){
   let h = '<h2>Survivants</h2><p class="sub">' + S.surv.length + ' habitants pour ' + cap() + ' lits. Le niveau (N1 à N9) ne change jamais : il vaut 1 % de remise par niveau sur les commandes du commerce, et les remises des trois employés s\'additionnent. Pour monter en gamme, renvoie les moins doués et accueille mieux.</p>';
+  if (!S.waiting && cap() > S.surv.length) h += '<div class="card"><div class="row"><span class="big">📻</span><div class="grow"><b>Appel radio</b><small>Quelqu\'un se présente au portail tout de suite.</small></div>' + costBtn('radioCall', '', 'Appeler', {n:1}, 'nutb sm') + '</div></div>';
   if (!S.surv.length) return h + '<div class="card empty-note">Personne pour l\'instant. Construis un logement, puis ouvre à ceux qui frappent au portail.</div>';
   h += '<div class="card list">';
   S.surv.slice().sort((a, b) => b.lvl - a.lvl).forEach(s => {
@@ -1666,17 +1696,19 @@ function specSig(){ return S.lots.map((l, i) => l.k === 'special' ? l.type[0] + 
 function weaponCards(){
   const best = weaponIdx(), cur = curW(), wn = WEAPONS[best + 1]; let h = '<h3>Ton arsenal</h3>';
   for (let k = best; k >= 0; k--){ const w = WEAPONS[k]; h += '<button class="pickrow' + (k === cur ? ' on' : '') + '" data-act="setWeapon" data-a="' + k + '"><span class="big">' + (k === cur ? '🎯' : '▫️') + '</span><span class="grow"><b>' + w.n + '</b><small>' + w.t + ' ' + w.d + ' dégât' + (w.d > 1 ? 's' : '') + ' au portail, chargeur de ' + w.mag + '.</small></span></button>'; }
+  if (wn) h += '<div class="btnrow" style="margin:0 0 8px">' + costBtn('unlockW', best + 1, 'Débloquer : ' + wn.n, {n:3 + 2 * (best + 1)}, 'nutb') + '</div>';
   return h + '<small style="color:var(--ink2);display:block;margin:-2px 0 10px">' + (wn ? 'Encore ' + (wn.runs - S.runs) + ' ravitaillement' + (wn.runs - S.runs > 1 ? 's' : '') + ' réussi' + (wn.runs - S.runs > 1 ? 's' : '') + ' pour : ' + wn.n + '.' : 'Tu as tout l\'arsenal.') + ' Tu peux aussi changer d\'arme pendant un ravitaillement en touchant les munitions.</small>';
 }
 function specialCards(i){
   const lv = level(); let h = '';
   SPECIALS.forEach(d => { if (hasSpec(d.id)) return; const ok = lv >= d.lvl;
-    h += '<div class="offer spec' + (ok ? '' : ' off') + '" style="cursor:default"><span class="em">' + d.e + '</span><span class="grow" style="flex:1;min-width:0"><b>' + esc(d.n) + ' <span class="tagk pc" style="background:#7A3FB0">⭐ Spécial</span></b><small>' + esc(d.d) + (ok ? '' : ' Débloqué avec ' + d.lvl + ' bâtiments.') + '</small></span>' + (ok ? costBtn('buildSpecial', i + ':' + d.id, 'Bâtir', {c:d.cost}, 'sm') : '<span class="tagk">🔒</span>') + '</div>'; });
+    h += '<div class="offer spec' + (ok ? '' : ' off') + '" style="cursor:default"><span class="em">' + d.e + '</span><span class="grow" style="flex:1;min-width:0"><b>' + esc(d.n) + ' <span class="tagk pc" style="background:#7A3FB0">⭐ Spécial</span></b><small>' + esc(d.d) + (ok ? '' : ' Débloqué avec ' + d.lvl + ' bâtiments.') + '</small></span>' + (ok ? costBtn('buildSpecial', i + ':' + d.id, 'Bâtir', specCost(d), d.nuts ? 'sm nutb' : 'sm') : '<span class="tagk">🔒</span>') + '</div>'; });
   return h;
 }
 function panelSpecial(i, l){
   const d = SPEC(l.type); let h = '<div class="card"><h2>' + d.e + ' ' + esc(d.n) + ' <span class="tagk pc" style="background:#7A3FB0">⭐ Spécial</span></h2><p class="sub">' + esc(d.g) + '. ' + esc(d.d) + '</p>';
   if (l.type === 'potager') return h + '<p><b>+' + fmt(potRate() * 3600) + ' 📦 par heure</b></p><small>La récolte grossit avec le nombre de bâtiments de la rue.</small></div>';
+  if (l.type === 'antenne') return h + '<p><b>Niveau 5 minimum pour les nouveaux arrivants</b></p><small>Et ils frappent au portail un peu plus souvent.</small></div>';
   h += '</div><div class="card list">';
   for (let k = 0; k < l.n; k++) h += '<div class="row"><span class="big">💪</span><div class="grow"><b>' + ['Jo la Mailloche', 'Tatie Béton', 'Le Grand Mimile'][k] + '</b><small>' + (l.cd[k] > 0 ? 'Récupère encore ' + ftime(Math.ceil(l.cd[k] / 60) * 60) : 'Prêt. Quand un camion rentre, choisis « Laisser faire un Gros Bras » au dépôt.') + '</small></div><span class="tagk">' + (l.cd[k] > 0 ? '💤' : '✅') + '</span></div>';
   h += '</div>'; if (l.n < 3) h += '<div class="card"><div class="row"><span class="big">➕</span><div class="grow"><b>Recruter un Gros Bras de plus</b><small>Un camion de plus ramené sans toi toutes les 5 h 30.</small></div>' + costBtn('hireMerc', i, 'Recruter', {c:MERC_COST[l.n]}, 'sm') + '</div></div>';
@@ -1688,12 +1720,12 @@ function buildMenu(i){
   return '<h2>Que construire ici ?</h2><div class="cards3">' +
     '<button class="bcard" data-act="homes" data-a="' + i + '"><div class="pv big">' + quirkySVG('bus', 1, 77) + '</div><b>Logement</b><small>' + HOUSE_CAP[1] + ' lits, 3 styles au choix</small><span class="price">' + fmt(houseCost()) + ' 🪙</span></button>' +
     '<button class="bcard" data-act="offers" data-a="' + i + '"><div class="pv">' + shopSVG(SHOPS[0], 123, true) + '</div><b>Commerce</b><small>3 propositions au hasard</small><span class="price">Voir</span></button>' +
-    '<button class="bcard' + (can({c:depotCost()}) ? '' : ' off') + '" data-act="buildDepot" data-a="' + i + '"><div class="pv">' + depotSVG(55, false) + '</div><b>Dépôt</b><small>Un camion pour piller les environs</small><span class="price">' + fmt(depotCost()) + ' 🪙</span></button></div>';
+    (countK('depot') >= maxDepots() ? '<div class="bcard off" style="cursor:default"><div class="pv">' + depotSVG(55, false) + '</div><b>Dépôt</b><small>' + countK('depot') + ' sur ' + maxDepots() + ' : le prochain à ' + (countK('depot') * 4) + ' bâtiments</small><span class="price">🔒</span></div>' : '<button class="bcard' + (can({c:depotCost()}) ? '' : ' off') + '" data-act="buildDepot" data-a="' + i + '"><div class="pv">' + depotSVG(55, false) + '</div><b>Dépôt</b><small>Un camion pour piller (' + countK('depot') + ' sur ' + maxDepots() + ')</small><span class="price">' + fmt(depotCost()) + ' 🪙</span></button>') + '</div>';
 }
 function rushSig(){ const l = typeof sel === 'number' ? S.lots[sel] : null; return !l ? '' : l.k === 'build' ? 'b' + rushCost(l.t) : l.k === 'depot' && l.run && !l.run.done ? 'r' + rushRunCost(l.run.t) : ''; }
 function panelSig(){
   const lots = S.lots.map(l => l.k === 'shop' ? l.type + l.staff.join('.') + l.prods.map(p => p.st[0]).join('') : l.k === 'depot' ? 'd' + (l.run ? (l.run.done ? 2 : 1) : 0) : l.k + (l.lvl || '')).join('|');
-  return [tab, sel, lots, S.surv.map(s => s.id + (s.job ? s.job.k[0] : '-')).join(','), S.runs, S.gate, level(), S.mute, S.rot, cloudState, S.offers ? S.offers.lot + S.offers.list.join() : '', costsInView.map(c => can(c) ? 1 : 0).join(''), S.heroes.join(), S.ward.join(), S.surv.map(x => x.look.cos || '').join(), tab === 'taches' ? S.q + S.tasks.map(t => t.id + Math.min(t.goal, statOf(t.id) - t.base)).join() : '', rushSig(), specSig(), S.wsel, homeOffers ? 'h' + homeOffers.lot + homeOffers.list.join() : ''].join('#');
+  return [tab, sel, lots, S.surv.map(s => s.id + (s.job ? s.job.k[0] : '-')).join(','), S.runs, S.gate, level(), S.mute, S.rot, cloudState, S.offers ? S.offers.lot + S.offers.list.join() : '', costsInView.map(c => can(c) ? 1 : 0).join(''), S.heroes.join(), S.ward.join(), S.surv.map(x => x.look.cos || '').join(), tab === 'taches' ? S.q + S.tasks.map(t => t.id + Math.min(t.goal, statOf(t.id) - t.base)).join() : '', rushSig(), specSig(), S.wsel, homeOffers ? 'h' + homeOffers.lot + homeOffers.list.join() : '', tab === 'taches' ? achSig() : '', sel === 'gate' ? 'k' + S.km + '.' + Math.floor(S.kills / 5) : '', S.wun, tab === 'gens' ? (S.waiting ? 'w' : '') + cap() : ''].join('#');
 }
 function renderPanel(){
   costsInView = [];
@@ -1748,18 +1780,19 @@ function renderRail(){
   const items = [], away = camX > OUT_W - 20;
   if (Z.length && away) items.push(['toGate', '', '🧟', Z.length, 1]);
   if (S.waiting) items.push(['knock', '', '🙋', 0, 0]);
-  const nc = nextCab(); if (nc >= 0) items.push(['toCab', '', '🆘', nc - S.lots.length + 1, 0]);
-  const tdone = S.tasks.filter(taskDone).length; if (tdone) items.push(['tab', 'taches', '🎯', tdone, 0]);
+  if (S.kills >= kmGoal(S.km)) items.push(['gate', '', '🏅', 1, 0]);
+  const tdone = S.tasks.filter(taskDone).length + achReady().length; if (tdone) items.push(['tab', 'taches', '🎯', tdone, 0]);
   const need = [], closed = [], back = [];
   S.lots.forEach((l, i) => { if (l.k === 'shop'){ if (!l.staff.some(v => v != null)) closed.push(i); else if (shopNeeds(l)) need.push(i); } if (l.k === 'depot' && l.run && l.run.done) back.push(i); });
   if (back.length) items.push(['sel', back[0], '🚚', back.length, 0]);
   if (need.length) items.push(['sel', need[0], '📦', need.length, 0]);
   if (closed.length && freeSurv().length) items.push(['sel', closed[0], '👤', closed.length, 0]);
+  const pr = {'🧟':0, '🙋':1, '🏅':2, '🎯':3, '🚚':4, '📦':5, '👤':6, '🆘':7}; items.sort((x, y) => pr[x[2]] - pr[y[2]]); if (items.length > 6) items.length = 6;
   const sig = JSON.stringify(items); if (sig === railSig) return; railSig = sig;
   el.rail.innerHTML = items.map(x => '<button class="rb' + (x[4] ? ' warn' : '') + '" data-act="' + x[0] + '" data-a="' + x[1] + '">' + x[2] + (x[3] ? '<b>' + x[3] + '</b>' : '') + '</button>').join('');
 }
 let dotOn = null;
-function tabDot(){ const on = S.tasks.some(taskDone); if (on === dotOn) return; dotOn = on; const b = $('#tabs button[data-a="taches"]'), i = b.querySelector('i'); if (on && !i) b.appendChild(document.createElement('i')); if (!on && i) i.remove(); }
+function tabDot(){ const on = S.tasks.some(taskDone) || achReady().length > 0; if (on === dotOn) return; dotOn = on; const b = $('#tabs button[data-a="taches"]'), i = b.querySelector('i'); if (on && !i) b.appendChild(document.createElement('i')); if (!on && i) i.remove(); }
 function setTxt(id, v){ if (hudPrev[id] !== v){ hudPrev[id] = v; const n = document.getElementById(id); if (n) n.textContent = v; } }
 function refreshUI(){
   if (worldDirty){ renderWorld(); markSel(); }
@@ -1895,6 +1928,7 @@ function miniShoot(ev){
     }
     hit.forEach((o, n) => { o.hp -= n ? Math.max(1, W.md - 1) : W.md; if (o.hp <= 0) mKill(o, true); else { o.el.classList.add('hit'); setTimeout(() => o.el.classList.remove('hit'), 90); } });
     const got = m.kills - k0; if (got) sfx.hit();
+    if (got >= 4) S.st.mega++;
     if (got >= 2){ m.bonus += got - 1; mFx(e.x - 30, 120 + e.lane * 9, got === 2 ? 'Doublé !' : got === 3 ? 'Triplé !' : 'Méga carnage ! ×' + got); }
   }
   if (m.ammo <= 0) m.reload = m.rl;
@@ -1936,7 +1970,7 @@ function endMini(fail){
   const l = S.lots[m.lot], d = DEST.find(x => x.id === l.run.dest), s = survBy(l.run.sid), hpR = clamp(m.hp / m.maxHp, 0, 1);
   const mult = (s && s.perso === 'debrouillard' ? 1.4 : 1) * (hasHero('bebert') ? 1.25 : 1) * (.55 + .45 * hpR) * (1 + .03 * m.kills) * (1 + .06 * m.saved) * (1 + .02 * Math.min(10, m.bonus)) * (fail ? .5 : 1);
   const loot = Math.round(d.loot * (1 + .2 * level()) * mult), coins = Math.round(loot * .25), nut = !fail && hpR > .8 && Math.random() < d.t / 3600 ? 1 : 0;
-  S.supplies += loot; S.coins += coins; S.nuts += nut; S.st.saved += m.saved; if (!fail) S.runs++; l.run = null; if (s) s.job = null; dirty(); fail ? sfx.bad() : sfx.coin();
+  S.supplies += loot; S.coins += coins; S.nuts += nut; S.st.saved += m.saved; if (!fail) S.runs++; if (!fail && hpR > .8) S.st.perfect++; l.run = null; if (s) s.job = null; dirty(); fail ? sfx.bad() : sfx.coin();
   const wi = weaponIdx(), next = WEAPONS[wi + 1];
   const e = $('#mini-end'); e.hidden = false;
   e.innerHTML = '<div class="card"><h2>' + (fail ? 'Camion en rade' : hpR > .8 ? 'Livraison impeccable' : 'Camion rentré') + '</h2><p class="sub">' + (fail ? 'Le camion a lâché, la moitié du chargement est restée sur la route.' : m.kills + ' zombies dégommés' + (m.saved ? ', ' + m.saved + ' fuyard' + (m.saved > 1 ? 's' : '') + ' sauvé' + (m.saved > 1 ? 's' : '') : '') + ', camion à ' + Math.round(hpR * 100) + ' %.' + (m.bonus ? ' Bonus carnage : +' + Math.min(10, m.bonus) * 2 + ' %.' : '')) + '</p>' +
@@ -1966,6 +2000,52 @@ function rescue(i, price){
     '<div class="btnrow"><button class="btn y" data-act="closeSheet">Super</button></div>', 'rescue');
 }
 /* ================= heroes, tasks, costumes ================= */
+const KILL_STEPS = [25, 50, 100, 200, 350, 500, 750, 1000, 1500, 2000, 3000, 4000, 5000, 7500, 10000];
+const kmGoal = k => k < KILL_STEPS.length ? KILL_STEPS[k] : 10000 + (k - KILL_STEPS.length + 1) * 5000;
+const kmReward = k => k < 4 ? {c:50 * Math.pow(2, k)} : {n:Math.min(5, 1 + Math.floor((k - 4) / 3))};
+const starCount = () => S.lots.reduce((t, l) => t + (l.k === 'shop' ? l.staff.filter(id => { const x = id != null && survBy(id); return x && x.perso === SHOP[l.type].cat; }).length : 0), 0);
+const bestTeam = () => S.lots.reduce((t, l) => Math.max(t, l.k === 'shop' ? l.staff.filter(id => { const x = id != null && survBy(id); return x && x.perso === SHOP[l.type].cat; }).length : 0), 0);
+const ACH = [
+  {id:'pop10', e:'👥', n:'Petit hameau', d:'10 habitants', p:() => [S.surv.length, 10], r:{s:100}},
+  {id:'pop25', e:'👥', n:'Vrai village', d:'25 habitants', p:() => [S.surv.length, 25], r:{s:400}},
+  {id:'pop50', e:'👥', n:'Bourg animé', d:'50 habitants', p:() => [S.surv.length, 50], r:{s:1200, n:1}},
+  {id:'pop80', e:'👥', n:'Petite ville', d:'80 habitants', p:() => [S.surv.length, 80], r:{s:3000, n:2}},
+  {id:'lv5', e:'🏘️', n:'Ça pousse', d:'5 bâtiments', p:() => [level(), 5], r:{s:80}},
+  {id:'lv12', e:'🏘️', n:'Quartier vivant', d:'12 bâtiments', p:() => [level(), 12], r:{s:500}},
+  {id:'lv20', e:'🏘️', n:'Grande rue', d:'20 bâtiments', p:() => [level(), 20], r:{s:1500, n:1}},
+  {id:'lv30', e:'🏘️', n:'Rue complète', d:'30 bâtiments', p:() => [level(), 30], r:{s:4000, n:3}},
+  {id:'team', e:'⭐', n:'Équipe de rêve', d:'3 employés au bon poste dans un même commerce', p:() => [bestTeam(), 3], r:{s:250, n:1}},
+  {id:'stars10', e:'⭐', n:'Chacun à sa place', d:'10 employés au bon poste', p:() => [starCount(), 10], r:{s:600}},
+  {id:'n9', e:'💎', n:'La perle rare', d:'Héberger un survivant de niveau 9', p:() => [S.surv.some(x => x.lvl >= 9) ? 1 : 0, 1], r:{s:300, n:1}},
+  {id:'resc1', e:'🆘', n:'Porte ouverte', d:'Libérer 1 rescapé', p:() => [S.resc, 1], r:{s:150}},
+  {id:'resc4', e:'🆘', n:'Serrurier au grand cœur', d:'Libérer 4 rescapés', p:() => [S.resc, 4], r:{s:900, n:2}},
+  {id:'hero1', e:'🦸', n:'Du renfort', d:'Recruter un héros', p:() => [S.heroes.length, 1], r:{s:200}},
+  {id:'hero4', e:'🦸', n:'La bande au complet', d:'Recruter les 4 héros', p:() => [S.heroes.length, 4], r:{s:1500, n:3}},
+  {id:'cos3', e:'👕', n:'Fashion victime', d:'Posséder 3 costumes', p:() => [S.ward.length, 3], r:{s:300}},
+  {id:'runs10', e:'🚚', n:'Routier confirmé', d:'10 ravitaillements réussis', p:() => [S.runs, 10], r:{s:300}},
+  {id:'runs50', e:'🚚', n:'Roi de la route', d:'50 ravitaillements réussis', p:() => [S.runs, 50], r:{s:2000, n:2}},
+  {id:'perfect5', e:'✨', n:'Pas une rayure', d:'5 livraisons impeccables', p:() => [S.st.perfect, 5], r:{s:500, n:1}},
+  {id:'mega', e:'💥', n:'Méga carnage', d:'4 zombies ou plus en un seul tir', p:() => [S.st.mega, 1], r:{s:300, n:1}},
+  {id:'saved20', e:'🏃', n:'Ange gardien', d:'Sauver 20 fuyards en ravitaillement', p:() => [S.st.saved, 20], r:{s:600, n:1}},
+  {id:'spec', e:'⭐', n:'Grand projet', d:'Bâtir un bâtiment spécial', p:() => [S.lots.filter(l => l.k === 'special').length, 1], r:{s:400}},
+  {id:'homes4', e:'🏠', n:'Rue pittoresque', d:'4 styles de logements différents', p:() => [new Set(S.lots.filter(l => l.k === 'house').map(l => l.st || 'maison')).size, 4], r:{s:500, n:1}},
+  {id:'earn100k', e:'🪙', n:'Tiroir-caisse', d:'100 000 pièces encaissées en boutique', p:() => [S.st.earned, 100000], r:{s:1500, n:1}},
+  {id:'gate4', e:'🚧', n:'Forteresse', d:'Portail au niveau maximum', p:() => [S.gate, GATES.length - 1], r:{s:1000, n:2}}
+];
+const achDone = a => { const q = a.p(); return q[0] >= q[1]; };
+const achReady = () => ACH.filter(a => !S.ach.includes(a.id) && achDone(a));
+const achSig = () => S.ach.length + ':' + ACH.map(a => S.ach.includes(a.id) ? '' : Math.min(a.p()[0], a.p()[1])).join('.');
+function achList(){
+  const row = (a, st) => { const q = a.p(), v = Math.min(q[0], q[1]);
+    return '<div class="row"><span class="big">' + (st === 2 ? '✅' : a.e) + '</span><div class="grow"><b>' + esc(a.n) + '</b><small>' + esc(a.d) + (st === 2 ? '' : ' · ' + fmt(v) + ' / ' + fmt(q[1])) + ' · ' + costTxt(a.r) + '</small></div>' + (st === 1 ? '<button class="btn y sm" data-act="claimAch" data-a="' + a.id + '">Récupérer</button>' : '') + '</div>'; };
+  const ready = achReady(), todo = ACH.filter(a => !S.ach.includes(a.id) && !achDone(a)), done = ACH.filter(a => S.ach.includes(a.id));
+  return '<h3>Succès (' + done.length + ' / ' + ACH.length + ')</h3><div class="card list">' + ready.map(a => row(a, 1)).join('') + todo.map(a => row(a, 0)).join('') + done.map(a => row(a, 2)).join('') + '</div>';
+}
+function killCard(){
+  const g = kmGoal(S.km), r = kmReward(S.km), done = S.kills >= g, prev = S.km ? kmGoal(S.km - 1) : 0;
+  return '<div class="card"><div class="row"><span class="big">🏅</span><div class="grow"><b>Tableau de chasse</b><small>' + fmt(Math.min(S.kills, g)) + ' / ' + fmt(g) + ' zombies dégommés · prime ' + costTxt(r) + '</small></div>' + (done ? '<button class="btn y sm" data-act="claimKill">Récupérer</button>' : '') + '</div><div class="bar g"><i style="width:' + clamp((S.kills - prev) / (g - prev) * 100, 0, 100).toFixed(0) + '%"></i></div><small style="margin-top:6px">Le compteur est cumulatif : chaque palier compte tous les zombies déjà abattus. Les premières primes sont en pièces, les suivantes en écrous.</small></div>';
+}
+
 const statOf = id => id === 'kill' ? S.kills : id === 'order' ? S.st.orders : id === 'run' ? S.runs : id === 'picked' ? S.st.picked : id === 'earned' ? S.st.earned : id === 'welcome' ? S.st.welcomed : S.st.saved;
 const taskDone = t => statOf(t.id) - t.base >= t.goal;
 function taskOk(id){
@@ -1989,7 +2069,7 @@ function panelTaches(){
     h += '<div class="card"><div class="row"><span class="big">🎯</span><div class="grow"><b>' + esc(taskTxt(t)) + '</b><small>' + fmt(v) + ' / ' + fmt(t.goal) + ' · récompense ' + costTxt(t.r) + '</small></div>' + (done ? '<button class="btn y sm" data-act="claimTask" data-a="' + k + '">Récupérer</button>' : '') + '</div><div class="bar g"><i style="width:' + (v / t.goal * 100).toFixed(0) + '%"></i></div></div>'; });
   if (!S.tasks.length) h += '<div class="card empty-note">Les tâches arrivent dès que la rue tourne un peu.</div>';
   h += '<h3>Mission principale</h3>' + (qi ? '<div class="card"><div class="row"><span class="big">📌</span><div class="grow"><b>' + esc(qi.q.t) + '</b><small>' + fmt(qi.v) + ' / ' + fmt(qi.g) + ' · récompense ' + costTxt(qi.q.r) + '</small></div>' + (qi.done ? '<button class="btn y sm" data-act="quest">Récupérer</button>' : '') + '</div></div>' : '<div class="card empty-note">Toutes les missions sont bouclées. Chapeau.</div>');
-  return h;
+  return h + achList();
 }
 function panelHeros(){
   const lv = level();
@@ -2042,8 +2122,12 @@ function act(name, a){
       if (n){ dirty(); sfx.ok(); ft(lotX(i) + 40, BASE + 150, n + ' commande' + (n > 1 ? 's' : '') + ' 📦'); updateBadges(); if (sel === i) renderPanel(); if (miss) toast('Pas assez de vivres pour tout commander ici.'); }
       else { toast('Pas assez de vivres. Dégomme des zombies ou envoie un camion.'); sfx.bad(); selectLot(i); } break; }
     case 'buildHouse': case 'buildDepot': {
-      const i = +a, l = S.lots[i], k = name === 'buildHouse' ? 'house' : 'depot'; if (!l || l.k !== 'empty' || !pay({c:k === 'house' ? houseCost() : depotCost()})) break;
+      const i = +a, l = S.lots[i], k = name === 'buildHouse' ? 'house' : 'depot'; if (k === 'depot' && countK('depot') >= maxDepots()){ toast('Un dépôt de plus sera possible à ' + (countK('depot') * 4) + ' bâtiments.'); break; } if (!l || l.k !== 'empty' || !pay({c:k === 'house' ? houseCost() : depotCost()})) break;
       const T = buildTime(i, k); S.lots[i] = {k:'build', into:k === 'house' ? {k, lvl:1, seed:rint(1, 1e9)} : {k, seed:rint(1, 1e9), run:null}, t:T, T}; S.offers = null; sfx.build(); renderWorld(); markSel(); renderPanel(); break; }
+    case 'claimKill': { if (S.kills < kmGoal(S.km)) break; const r = kmReward(S.km); S.coins += r.c || 0; S.nuts += r.n || 0; S.km++; dirty(); sfx.coin(); bump(r.n ? 'c-nuts' : 'c-coins'); toast('Prime de chasse : +' + costTxt(r) + '. Prochain palier : ' + fmt(kmGoal(S.km)) + ' zombies.'); railSig = ''; renderPanel(); break; }
+    case 'claimAch': { const o = ACH.find(x => x.id === a); if (!o || S.ach.includes(a) || !achDone(o)) break; S.ach.push(a); S.coins += o.r.c || 0; S.supplies += o.r.s || 0; S.nuts += o.r.n || 0; dirty(); sfx.coin(); bump(o.r.n ? 'c-nuts' : 'c-sup'); toast('Succès « ' + o.n + ' » : +' + costTxt(o.r)); railSig = ''; renderPanel(); break; }
+    case 'radioCall': { if (S.waiting || cap() <= S.surv.length || !pay({n:1})) break; makeWaiting(); sfx.ok(); toast('Appel radio entendu : quelqu\'un frappe au portail.'); renderPanel(); break; }
+    case 'unlockW': { const k = +a; if (k !== weaponIdx() + 1 || !WEAPONS[k] || !pay({n:3 + 2 * k})) break; S.wun = k; S.wsel = k; sfx.build(); toast('Nouvelle arme : ' + WEAPONS[k].n + '.'); renderPanel(); break; }
     case 'export': openExport(); break;
     case 'import': openImport(); break;
     case 'copySave': { const ta = $('#code-out'); if (!ta) break; const done = () => toast('Code copié. Colle-le dans Réglages, Importer, de l\'autre côté.'); ta.focus(); ta.select(); try { ta.setSelectionRange(0, ta.value.length); } catch (e){}
@@ -2054,7 +2138,7 @@ function act(name, a){
     case 'homesBack': homeOffers = null; renderPanel(); break;
     case 'buildHome': { const q = a.split(':'), i = +q[0], l = S.lots[i]; if (!l || l.k !== 'empty' || !HOMES.some(h => h.id === q[1]) || !pay({c:houseCost()})) break;
       const T = buildTime(i, 'house'); S.lots[i] = {k:'build', into:{k:'house', lvl:1, seed:rint(1, 1e9), st:q[1]}, t:T, T}; homeOffers = null; S.offers = null; sfx.build(); renderWorld(); markSel(); renderPanel(); break; }
-    case 'buildSpecial': { const q = a.split(':'), i = +q[0], d = SPEC(q[1]), l = S.lots[i]; if (!l || l.k !== 'empty' || !d || hasSpec(d.id) || level() < d.lvl || !pay({c:d.cost})) break;
+    case 'buildSpecial': { const q = a.split(':'), i = +q[0], d = SPEC(q[1]), l = S.lots[i]; if (!l || l.k !== 'empty' || !d || hasSpec(d.id) || level() < d.lvl || !pay(specCost(d))) break;
       const T = buildTime(i, 'shop'); S.lots[i] = {k:'build', into:{k:'special', type:d.id, seed:rint(1, 1e9), n:1, cd:[0, 0, 0]}, t:T, T}; S.offers = null; sfx.build(); renderWorld(); markSel(); renderPanel(); break; }
     case 'hireMerc': { const l = S.lots[+a]; if (!l || l.k !== 'special' || l.type !== 'mercs' || l.n >= 3 || !pay({c:MERC_COST[l.n]})) break; l.n++; sfx.build(); toast('Un Gros Bras de plus au QG.'); renderPanel(); break; }
     case 'mercRun': { const l = S.lots[+a], ml = mercLot(); if (!l || l.k !== 'depot' || !l.run || !l.run.done || !ml) break; const k = ml.cd.slice(0, ml.n).findIndex(c => c <= 0); if (k < 0) break;
